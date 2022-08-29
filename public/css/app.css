@@ -1,0 +1,270 @@
+@import url(https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap);
+:root {
+    --tan: #DDC5A7;
+    --saddlebrown: #823000;
+    --darksaddlebrown: #662500;
+    --spanishblue: #016FB9;
+    --russianviolet: #111344;
+    --forestgreen: #1B570F;
+    --headerfont: 'DM Serif Display';
+    --bodyfont: 'Cabin';
+}
+@-webkit-keyframes waxing {
+    0% {
+        transform: scale(1);
+        opacity: 100%;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 75%;
+    }
+}
+@keyframes waxing {
+    0% {
+        transform: scale(1);
+        opacity: 100%;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 75%;
+    }
+}
+@-webkit-keyframes waning {
+    0% {
+        transform: scale(1.1);
+        opacity: 75%;
+    }
+    100% {
+        transform: scale(1.0);
+        opacity: 100%;
+    }
+}
+@keyframes waning {
+    0% {
+        transform: scale(1.1);
+        opacity: 75%;
+    }
+    100% {
+        transform: scale(1.0);
+        opacity: 100%;
+    }
+}
+@-webkit-keyframes fadeout {
+    0% {opacity: 100%;}
+    100% {opacity: 0%;}
+}
+@keyframes fadeout {
+    0% {opacity: 100%;}
+    100% {opacity: 0%;}
+}
+@-webkit-keyframes fadein {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+@keyframes fadein {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+h1, h2, h3 {
+    font-family: var(--headerfont);
+}
+
+p {
+    font-family: var(--bodyfont);
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: var(--spanishblue);
+    transition: color 0.25s;
+}
+
+a:hover {
+    color: var(--russianviolet);
+}
+
+header {
+    display: grid;
+    grid-template-columns: 20vw 20vw 60vw;
+    align-items: center;
+    padding: 2vw;
+}
+
+header .logo {
+    max-height: 4vw;
+    max-width: 100%;
+    justify-self: center;
+}
+
+.site-title {
+    font-family: var(--headerfont);
+    font-size: 3vw;
+    color: black;
+    transition: color 0.25s;
+}
+
+.site-title:hover, .site-title:active {
+    color: rgb(112, 112, 112);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-family: var(--bodyfont);
+    font-weight: 700;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.5vw;
+}
+
+nav .categories {
+    border: none;
+    font-family: var(--bodyfont);
+    color: var(--spanishblue);
+    font-weight: 700;
+    font-size: 1.5vw;
+}
+
+nav .categories-dropdown {
+    display: none;
+}
+
+.categories-div:hover .categories-dropdown, .categories-div:focus-within .categories-dropdown {
+    background-color: white;
+    position: absolute;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainFlex {
+    margin: 0 20vw 0 20vw;
+}
+
+.index-matter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.index-text {
+    margin-left: 2vw;
+}
+
+.index-text h2 {
+    font-family: var(--headerfont);
+    font-size: 3vw;
+    margin: 0 0 0 0;
+    -webkit-animation: fadein 2s;
+            animation: fadein 2s;
+}
+ 
+.carousel {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    border-style: solid;
+    border-color: black;
+    background-color: white;
+}
+
+.carousel .focused {
+    height: 25vw;
+    width: 25vw;
+    padding: 2vw;
+    -webkit-animation: fadein 0.5s;
+            animation: fadein 0.5s;
+}
+
+.carousel .focused-transition {
+    height: 25vw;
+    width: 25vw;
+    padding: 2vw;
+    -webkit-animation: fadeout 0.5s;
+            animation: fadeout 0.5s;
+}
+
+.carousel .thumbs {
+    display: grid;
+    grid-template-columns: 5vw 5vw 5vw 5vw;
+    grid-auto-rows: 7vw;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.carousel .thumb {
+    -webkit-animation: waning 0.5s;
+            animation: waning 0.5s;
+    height: 5vw;
+    width: 5vw;
+    cursor: pointer;
+}
+
+.carousel .current-thumb {
+    -webkit-animation: waxing 0.5s;
+            animation: waxing 0.5s;
+    height: 5vw;
+    width: 5vw;
+    transform: scale(1.1);
+    opacity: 75%;
+    cursor: pointer;
+}
+
+.product-preview {
+    display: grid;
+    grid-template-columns: 20vw auto;
+    justify-self: center;
+    padding: 2vw;
+}
+
+.product-preview a {
+    font-size: 1vw;
+    font-family: var(--bodyfont);
+    text-decoration: none;
+}
+
+.product-visual {
+    justify-self: center;
+}
+
+.product-preview img {
+    max-width: 15vw;
+    max-height: 15vw;
+}
+
+.product-text h3, .product-text .product-title {
+    margin: 0 0 0 0;
+    font-size: 1.5vw;
+    text-decoration: none;
+    color: black;
+    font-family: var(--headerfont);
+    font-size: 1.5vw;
+    transition: color 0.25s;
+}
+
+.product-title:hover, .product-title:active {
+    color:rgb(112, 112, 112)
+}
+
+.product-text p, .view-product-text p {
+    font-size: 1vw;
+}
+
+.view-product {
+    display: grid;
+    grid-template-columns: 30vw auto;
+}
+
+.view-product-text {
+    margin-left: 2vw;
+}
+
+.view-product-text h2 {
+    margin: 0;
+}
