@@ -31,9 +31,7 @@ export default function CartProvider({children}) {
                  * someone might have multiple of the same items, possibly
                  * even with the same options for each one. */
                 setCartState(current => {
-                    current.filter((index) => {
-                        return (index !== product.index);
-                    });
+                    current.splice(product.index, 1)
                 });
                 break;
         }

@@ -4,6 +4,7 @@ import { CartContext } from "../Providers/CartContext";
 export default function AddToCart(props) {
     let productValues = {
         id: props.productID,
+        name: props.productName,
     };
     const productOptions = Object.keys(props.options);
     productOptions.map((option) => {

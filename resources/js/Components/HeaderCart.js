@@ -4,9 +4,16 @@ import { CartContext } from "../Providers/CartContext";
 
 export default function HeaderCart(props) {
     const {cartState, updateCart} = useContext(CartContext);
-    const itemCount = cartState.length();
+    const itemCount = cartState.length;
+    const text = `Cart (${itemCount})`;
+
 
     return (
-        <Link href="/cart">Cart </Link>
-    )
+        <Link 
+            href="/cart" 
+            method = "post" 
+            data = {cartState}>
+                {text}
+        </Link>
+    );
 }

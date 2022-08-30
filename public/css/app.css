@@ -89,7 +89,7 @@ a:hover {
 
 header {
     display: grid;
-    grid-template-columns: 20vw 20vw 60vw;
+    grid-template-columns: 20vw 20vw auto;
     align-items: center;
     padding: 2vw;
 }
@@ -318,4 +318,27 @@ nav .categories-dropdown {
     font-weight: 700;
     background-color: var(--saddlebrown);
     color: white;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 20vw auto;
+    padding: 1vw;
+}
+
+.cart-item img {
+    height: 20vw;
+    width: 20vw;
+}
+
+.cart-item-text {
+    margin-left: 2vw;
+}
+
+.cart-item-text h3, h4 {
+    margin: 0;
+}
+
+.cart-item-options p {
+    margin: 0;
 }

@@ -13,7 +13,10 @@ export default function ViewProduct(props) {
                     <h2>{props.product.name}</h2>
                     <h3>{props.product.price}</h3>
                     <p>{props.product.description}</p>
-                    <AddToCart options = {props.options} productID = {props.product.id} />
+                    <AddToCart 
+                    options = {props.options} 
+                    productID = {props.product.id}
+                    productName = {props.product.name} />
                 </div>
             </div>
         </Layout>

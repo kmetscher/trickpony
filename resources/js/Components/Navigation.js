@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
+import HeaderCart from './HeaderCart'
 
 export default function Navigation() {
 
@@ -16,6 +17,7 @@ export default function Navigation() {
             </div>
             <Link>About</Link>
             <Link>Contact</Link>
+            <HeaderCart />
         </nav>
     )
 }
