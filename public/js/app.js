@@ -2078,6 +2078,106 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Components/AddToCart.js":
+/*!**********************************************!*\
+  !*** ./resources/js/Components/AddToCart.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AddToCart)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Providers_CartContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Providers/CartContext */ "./resources/js/Providers/CartContext.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function AddToCart(props) {
+  var productValues = {
+    id: props.productID
+  };
+  var productOptions = Object.keys(props.options);
+  productOptions.map(function (option) {
+    productValues = _objectSpread(_objectSpread({}, productValues), {}, _defineProperty({}, option, ''));
+  });
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(productValues),
+      _useState2 = _slicedToArray(_useState, 2),
+      optionState = _useState2[0],
+      setOptionState = _useState2[1];
+
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_Providers_CartContext__WEBPACK_IMPORTED_MODULE_1__.CartContext),
+      cartState = _useContext.cartState,
+      updateCart = _useContext.updateCart;
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      submissionState = _useState4[0],
+      setSubmissionState = _useState4[1];
+
+  var swatches = productOptions.map(function (option) {
+    var values = props.options[option].map(function (value) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: optionState[option] === value.name ? "swatch-selected" : "swatch",
+        style: {
+          backgroundColor: value.value
+        },
+        onClick: function onClick(e) {
+          e.preventDefault();
+          setOptionState(_objectSpread(_objectSpread({}, optionState), {}, _defineProperty({}, option, value.name)));
+        },
+        key: value.id
+      });
+    });
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "option",
+      key: option
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, option), values, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, optionState[option]));
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setTimeout(function () {
+      setSubmissionState(false);
+    }, 2500);
+  }, [submissionState]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "product-options"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "swatches"
+  }, swatches), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    disabled: Object.values(optionState).every(function (field) {
+      return field;
+    }) ? false : true,
+    onClick: function onClick(e) {
+      e.preventDefault();
+      updateCart('add', optionState);
+      setOptionState(productValues);
+      setSubmissionState(true);
+    },
+    className: "add-to-cart"
+  }, submissionState ? "Added to Cart!" : "Add to Cart"));
+}
+
+/***/ }),
+
 /***/ "./resources/js/Components/Carousel.js":
 /*!*********************************************!*\
   !*** ./resources/js/Components/Carousel.js ***!
@@ -2197,15 +2297,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./resources/js/Components/Header.js");
+/* harmony import */ var _Providers_CartProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Providers/CartProvider */ "./resources/js/Providers/CartProvider.js");
+
 
 
 function Layout(_ref) {
   var children = _ref.children;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Providers_CartProvider__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mainFlex"
-  }, children));
+  }, children)));
 }
 
 /***/ }),
@@ -2354,6 +2456,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Layout */ "./resources/js/Components/Layout.js");
 /* harmony import */ var _Components_Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Carousel */ "./resources/js/Components/Carousel.js");
+/* harmony import */ var _Components_AddToCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/AddToCart */ "./resources/js/Components/AddToCart.js");
+
 
 
 
@@ -2364,7 +2468,122 @@ function ViewProduct(props) {
     images: props.thumbs
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "view-product-text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, props.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.product.description))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, props.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.product.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    options: props.options,
+    productID: props.product.id
+  }))));
+}
+
+/***/ }),
+
+/***/ "./resources/js/Providers/CartContext.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Providers/CartContext.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CartContext": () => (/* binding */ CartContext)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var CartContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext({
+  cart: [],
+  updateCart: function updateCart(op, product) {}
+});
+
+/***/ }),
+
+/***/ "./resources/js/Providers/CartProvider.js":
+/*!************************************************!*\
+  !*** ./resources/js/Providers/CartProvider.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CartProvider)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _CartContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CartContext */ "./resources/js/Providers/CartContext.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function CartProvider(_ref) {
+  var children = _ref.children;
+  var storedCart = JSON.parse(localStorage.getItem('cart'));
+  var emptyCart = [];
+  storedCart = storedCart ? storedCart : emptyCart;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(storedCart),
+      _useState2 = _slicedToArray(_useState, 2),
+      cartState = _useState2[0],
+      setCartState = _useState2[1];
+
+  var updateCart = function updateCart(op, product) {
+    switch (op) {
+      case "add":
+        /* Using spread syntax to push a new cart item object 
+         * onto the stateful array without affecting existing
+         * items. This push operation also gives each item in
+         * the user's cart a unique index, referring to that 
+         * item in the user's cart specifically in that instance
+         * of their cart, which will be useful for removing 
+         * it later. */
+        setCartState(function (current) {
+          return [].concat(_toConsumableArray(current), [product]);
+        });
+        break;
+
+      case "remove":
+        /* We can pass the current index of a given item in the
+         * cart to this function, since such an index will be 
+         * unique among items. We then filter the current cart
+         * by != this index and return the new array of items. Using
+         * the index instead of something like a product ID prevents
+         * nuking every item in the cart that shares an ID, since 
+         * someone might have multiple of the same items, possibly
+         * even with the same options for each one. */
+        setCartState(function (current) {
+          current.filter(function (index) {
+            return index !== product.index;
+          });
+        });
+        break;
+    }
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    localStorage.setItem("cart", JSON.stringify(cartState));
+  }, [cartState]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CartContext__WEBPACK_IMPORTED_MODULE_1__.CartContext.Provider, {
+    value: {
+      cartState: cartState,
+      updateCart: updateCart
+    }
+  }, children);
 }
 
 /***/ }),
