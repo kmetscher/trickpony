@@ -28,6 +28,6 @@ class CartController extends Controller {
         ]);
     }
     public function viewCart() {
-        return Inertia::render('CartLoading');
+        return Inertia::render('Cart');
     }
 }

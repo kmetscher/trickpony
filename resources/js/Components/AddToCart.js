@@ -2,21 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../Providers/CartContext";
 
 export default function AddToCart(props) {
-    let productValues = {
-        id: props.productID,
-        name: props.productName,
+    const productValues = {
+        id: props.product.id,
+        name: props.product.name,
+        price: props.product.price,
+        local: props.product.local,
+        thumb: props.product.image,
     };
-    const productOptions = Object.keys(props.options);
-    productOptions.map((option) => {
-        productValues = {
-            ...productValues,
+    let productOptions = {};
+    const optionKeys = Object.keys(props.options);
+    optionKeys.map((option) => {
+        productOptions = {
+            ...productOptions,
             [option]: '',
         }
     });
-    const [optionState, setOptionState] = useState(productValues);
+    const [optionState, setOptionState] = useState(productOptions);
     const { cartState, updateCart } = useContext(CartContext);
     const [submissionState, setSubmissionState] = useState(false);
-    const swatches = productOptions.map((option) => {
+    const swatches = optionKeys.map((option) => {
         const values = props.options[option].map((value) => {
             return (
                 <button
@@ -63,8 +67,8 @@ export default function AddToCart(props) {
             }
             onClick = {(e) => {
                 e.preventDefault();
-                updateCart('add', optionState);
-                setOptionState(productValues);
+                updateCart('add', {product: productValues, options: optionState});
+                setOptionState(productOptions);
                 setSubmissionState(true);
             }} 
             className = "add-to-cart" >

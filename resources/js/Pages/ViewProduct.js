@@ -15,8 +15,7 @@ export default function ViewProduct(props) {
                     <p>{props.product.description}</p>
                     <AddToCart 
                     options = {props.options} 
-                    productID = {props.product.id}
-                    productName = {props.product.name} />
+                    product = {props.product}/>
                 </div>
             </div>
         </Layout>

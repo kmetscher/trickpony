@@ -20,5 +20,5 @@ Route::get('/cart',
     ->name('cart.view');
 
 Route::post('/cart',
-    [CartController::class, 'fetch'])
-    ->name('cart.fetch');
+    [CartController::class, 'validate'])
+    ->name('cart.validate');

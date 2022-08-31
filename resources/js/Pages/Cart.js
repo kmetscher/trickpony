@@ -6,7 +6,7 @@ export default function Cart(props) {
     return (
         <Layout>
             <h2>Cart</h2>
-            <CartContents cartItems = {props.cartItems} />
+            <CartContents />
         </Layout>
     );
 }

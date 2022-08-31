@@ -30,9 +30,10 @@ export default function CartProvider({children}) {
                  * nuking every item in the cart that shares an ID, since 
                  * someone might have multiple of the same items, possibly
                  * even with the same options for each one. */
-                setCartState(current => {
-                    current.splice(product.index, 1)
-                });
+                const newCart = cartState.filter((el, index) => {
+                    return (index !== product.index);
+                })
+                setCartState(newCart);
                 break;
         }
     }

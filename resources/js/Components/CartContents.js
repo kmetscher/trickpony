@@ -1,48 +1,31 @@
 import React, { useContext } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { CartContext } from "../Providers/CartContext";
+import RemoveFromCart from "./RemoveFromCart";
+import CartItem from "./CartItem";
 
 export default function CartContents(props) {
+    let subtotal = 0;
     const { cartState, updateCart } = useContext(CartContext);
-    const contents = props.cartItems.map((item, index) => {
-        const optionValues = Object.entries(item);
-        const options = optionValues.map((option, index) => {
-            if (
-                option[0] !== 'id' &&
-                option[0] !== 'name' &&
-                option[0] !== 'price' &&
-                option[0] !== 'local' &&
-                option[0] !== 'thumb') {
-                return (
-                    <p key={index}>{`${option[0]}: ${option[1]}`}</p>
-                );
-            }
-        })
+    if (cartState.length === 0) {
         return (
-            <div className="cart-item" key={index}>
-                <img src={item.thumb} />
-                <div className="cart-item-text">
-                    <h3>{item.name}</h3>
-                    <h4>{item.price}</h4>
-                    <div className="cart-item-options">
-                        {options}
-                    </div>
-                    <button 
-                    className="add-to-cart"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        updateCart("remove", {index: index});
-                    }}>
-                        Remove from Cart
-                    </button>
-                </div>
+            <div>
+                <h3>Looks like there's nothing here.</h3>
+                <h4>Add something special to your cart first.</h4>
             </div>
         )
+    }
+    const contents = cartState.map((item, index) => {
+        subtotal += item.product.price;
+        return (
+            <CartItem item={item} index={index} key={index}/>
+        );
     });
 
     return (
         <div className="cart-contents">
             {contents}
+            <h3>Subtotal: {subtotal}</h3>
         </div>
     )
 }

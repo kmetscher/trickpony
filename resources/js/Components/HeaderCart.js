@@ -7,13 +7,7 @@ export default function HeaderCart(props) {
     const itemCount = cartState.length;
     const text = `Cart (${itemCount})`;
 
-
     return (
-        <Link 
-            href="/cart" 
-            method = "post" 
-            data = {cartState}>
-                {text}
-        </Link>
+        <Link href="/cart">{text}</Link>
     );
 }
