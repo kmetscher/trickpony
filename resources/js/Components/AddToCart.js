@@ -24,26 +24,54 @@ export default function AddToCart(props) {
         const values = props.options[option].map((value) => {
             return (
                 <button
-                    className = {
+                    className={
                         optionState[option] === value.name ?
                             "swatch-selected" : "swatch"
                     }
-                    style = {{ backgroundColor: value.value }}
-                    onClick = {(e) => {
+                    style={
+                        option === 'Style' ?
+                        {
+                            border: 'none', 
+                            backgroundImage: `url('${value.value}')`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                            backgroundSize: 'contain'
+
+                        } :
+                        { backgroundColor: value.value }
+                    }
+                    onClick={(e) => {
                         e.preventDefault();
                         setOptionState({
                             ...optionState,
                             [option]: value.name
                         });
                     }}
-                    key = {value.id} >
+                    key={value.id} >
                 </button>
             );
         });
         return (
             <div className="option" key={option}>
                 <h4>{option}</h4>
-                {values}
+                <div className="option-swatches">
+                    {values}
+                    <button
+                        className={
+                            optionState[option] === 'Custom' ?
+                                "swatch-selected" : "swatch"
+                        }
+                        style={{ backgroundColor: 'white' }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setOptionState({
+                                ...optionState,
+                                [option]: 'Custom'
+                            });
+                        }} >
+                        ?
+                    </button>
+                </div>
                 <p>{optionState[option]}</p>
             </div>
         );
@@ -60,18 +88,27 @@ export default function AddToCart(props) {
             <div className="swatches">
                 {swatches}
             </div>
-            <button 
-            disabled = {
-                Object.values(optionState).every(field => field) ?
-                false : true
-            }
-            onClick = {(e) => {
-                e.preventDefault();
-                updateCart('add', {product: productValues, options: optionState});
-                setOptionState(productOptions);
-                setSubmissionState(true);
-            }} 
-            className = "add-to-cart" >
+            <h4>Special instructions</h4>
+            <textarea onChange={(e) => {
+                setOptionState({
+                    ...optionState,
+                    Instructions: e.target.value
+                });
+            }}
+            placeholder="Request unique colors, engravings, carvings, plaques...">
+            </textarea>
+            <button
+                disabled={
+                    Object.values(optionState).every(field => field) ?
+                        false : true
+                }
+                onClick={(e) => {
+                    e.preventDefault();
+                    updateCart('add', { product: productValues, options: optionState });
+                    setOptionState(productOptions);
+                    setSubmissionState(true);
+                }}
+                className="add-to-cart" >
                 {submissionState ? "Added to Cart!" : "Add to Cart"}
             </button>
         </div>

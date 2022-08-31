@@ -2143,7 +2143,13 @@ function AddToCart(props) {
     var values = props.options[option].map(function (value) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: optionState[option] === value.name ? "swatch-selected" : "swatch",
-        style: {
+        style: option === 'Style' ? {
+          border: 'none',
+          backgroundImage: "url('".concat(value.value, "')"),
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'contain'
+        } : {
           backgroundColor: value.value
         },
         onClick: function onClick(e) {
@@ -2156,7 +2162,18 @@ function AddToCart(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "option",
       key: option
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, option), values, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, optionState[option]));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, option), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "option-swatches"
+    }, values, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: optionState[option] === 'Custom' ? "swatch-selected" : "swatch",
+      style: {
+        backgroundColor: 'white'
+      },
+      onClick: function onClick(e) {
+        e.preventDefault();
+        setOptionState(_objectSpread(_objectSpread({}, optionState), {}, _defineProperty({}, option, 'Custom')));
+      }
+    }, "?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, optionState[option]));
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setTimeout(function () {
@@ -2167,7 +2184,14 @@ function AddToCart(props) {
     className: "product-options"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "swatches"
-  }, swatches), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, swatches), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Special instructions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+    onChange: function onChange(e) {
+      setOptionState(_objectSpread(_objectSpread({}, optionState), {}, {
+        Instructions: e.target.value
+      }));
+    },
+    placeholder: "Request unique colors, engravings, carvings, plaques..."
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     disabled: Object.values(optionState).every(function (field) {
       return field;
     }) ? false : true,

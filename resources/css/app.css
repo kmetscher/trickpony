@@ -241,7 +241,7 @@ nav .categories-dropdown {
 .swatches {
     display: grid;
     grid-template-columns: 20vw 20vw;
-    grid-auto-rows: 9vw;
+    grid-auto-rows: auto;
 }
 
 .swatches h4 {
@@ -249,13 +249,26 @@ nav .categories-dropdown {
     font-size: 1.5vw;
 }
 
+.option-swatches {
+    display: grid;
+    grid-template-columns: repeat(4, 3vw);
+    grid-auto-rows: 3vw;
+    align-items: center;
+}
+
 .swatch {
-    margin: 0 1vw 0 0;
     height: 2vw;
     width: 2vw;
     border: 2px solid black;
     transition: scale 0.5s;
     cursor: pointer;
+    font-size: 1vw;
+}
+
+.swatch p {
+    align-self: center;
+    justify-self: center;
+    margin: 0;
 }
 
 .swatch-selected {
@@ -266,6 +279,21 @@ nav .categories-dropdown {
     scale: 1.5;
     transition: scale 0.5s;
     cursor: pointer;
+    font-size: 1vw;
+}
+
+.product-options h4 {
+    font-size: 1.5vw;
+    margin: 0 0 1vw 0;
+}
+
+.product-options textarea {
+    resize: none;
+    font-family: var(--bodyfont);
+    font-size: 1vw;
+    display: block;
+    width: 30vw;
+    margin: 0 0 1vw 0;
 }
 
 .add-to-cart:disabled {
