@@ -142,6 +142,13 @@ nav .categories-dropdown {
     margin: 0 0 0 0;
     animation: fadein 2s;
 }
+
+.browse-links {
+    font-family: var(--bodyfont);
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+}
  
 .carousel {
     display: grid;

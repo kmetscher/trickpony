@@ -2614,18 +2614,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Layout */ "./resources/js/Components/Layout.js");
 /* harmony import */ var _Components_Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Carousel */ "./resources/js/Components/Carousel.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
 
 
-var testImages = ["/storage/images/lenna.png", "/storage/images/house.png", "/storage/images/bell.png", "/storage/images/peppers.png", "/storage/images/tree.png"];
+
+var indexImages = ["/storage/images/horsethumb3.jpg", "/storage/images/coaster5.jpg", "/storage/images/aggravation.jpg", "/storage/images/shotpaddle.jpg", "/storage/images/phoneholder2.jpg", "/storage/images/cuttingboard1.jpg", "/storage/images/mantle2.jpg", "/storage/images/barndoor1.jpg"];
 function Home() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "index-matter"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    images: testImages
+    images: indexImages
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "index-text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Handmade with heart in the Pacific Northwest"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Handmade with heart in the Pacific Northwest"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Some text here for the time being"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "browse-links"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    href: "/categories/toysandgames"
+  }, "Browse toys and games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    href: "/categories/homeandoffice"
+  }, "Browse home and office"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    href: "/categories/furnishings"
+  }, "Browse furnishings"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    href: "/categories/custom"
+  }, "Get a quote on a custom project")))));
 }
 
 /***/ }),
