@@ -46,6 +46,7 @@ h1, h2, h3, h4 {
 p {
     font-family: var(--bodyfont);
     font-weight: 400;
+    font-size: 1vw;
     color: black;
 }
 
@@ -81,6 +82,10 @@ header .logo {
 
 .site-title:hover, .site-title:active {
     color: rgb(112, 112, 112);
+}
+
+.mainFlex * {
+    animation: fadein 0.5s;
 }
 
 nav {
@@ -187,9 +192,12 @@ nav .categories-dropdown {
 
 .product-preview {
     display: grid;
-    grid-template-columns: 20vw auto;
+    grid-template-columns: 15vw auto;
     justify-self: center;
     padding: 2vw;
+    margin: 0 0 1vw 0;
+    border-style: solid;
+    border-color: black;
 }
 
 .product-preview a {
@@ -205,6 +213,10 @@ nav .categories-dropdown {
 .product-preview img {
     max-width: 15vw;
     max-height: 15vw;
+}
+
+.product-text {
+    margin-left: 2vw;
 }
 
 .product-text h3, .product-text .product-title {
@@ -317,13 +329,16 @@ nav .categories-dropdown {
 
 .cart-item {
     display: grid;
-    grid-template-columns: 20vw auto;
+    grid-template-columns: 10vw 20vw 25vw;
+    border-style: solid;
+    border-color: black;
     padding: 1vw;
+    margin: 1vw;
 }
 
 .cart-item img {
-    height: 20vw;
-    width: 20vw;
+    height: 10vw;
+    width: 10vw;
 }
 
 .cart-item-text {
@@ -331,9 +346,11 @@ nav .categories-dropdown {
 }
 
 .cart-item-text h3, h4 {
-    margin: 0;
+    margin: 0 0 1vw 0;
 }
 
-.cart-item-options p {
-    margin: 0;
+.cart-item-options li {
+    font-family: var(--bodyfont);
+    font-size: 1vw;
+    color: black;
 }

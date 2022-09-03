@@ -2301,15 +2301,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 /* harmony import */ var _Providers_CartContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Providers/CartContext */ "./resources/js/Providers/CartContext.js");
-/* harmony import */ var _RemoveFromCart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RemoveFromCart */ "./resources/js/Components/RemoveFromCart.js");
-/* harmony import */ var _CartItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CartItem */ "./resources/js/Components/CartItem.js");
-
+/* harmony import */ var _CartItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CartItem */ "./resources/js/Components/CartItem.js");
 
 
 
 
 function CartContents(props) {
   var subtotal = 0;
+  var local = 0;
 
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_Providers_CartContext__WEBPACK_IMPORTED_MODULE_2__.CartContext),
       cartState = _useContext.cartState,
@@ -2320,16 +2319,26 @@ function CartContents(props) {
   }
 
   var contents = cartState.map(function (item, index) {
-    subtotal += item.product.price;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CartItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    switch (Boolean(item.product.local)) {
+      case false:
+        subtotal += Number(item.product.price);
+        break;
+
+      case true:
+        local++;
+        break;
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CartItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
       item: item,
       index: index,
       key: index
     });
   });
+  var shippingMessage = local > 0 ? "Your cart contains items that are only deliverable locally. You won't be charged for them now; after arranging for delivery and completing the project, you'll be sent an invoice." : null;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart-contents"
-  }, contents, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Subtotal: ", subtotal));
+  }, contents, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Subtotal: ", subtotal), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, shippingMessage));
 }
 
 /***/ }),
@@ -2352,21 +2361,23 @@ __webpack_require__.r(__webpack_exports__);
 function CartItem(props) {
   var itemOptions = Object.keys(props.item.options);
   var optionValues = itemOptions.map(function (option) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
       key: option
     }, "".concat(option, ": ").concat(props.item.options[option]));
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "cart-item-visual"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     src: props.item.product.thumb
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart-item-text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.item.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, props.item.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "cart-item-options"
-  }, optionValues), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_RemoveFromCart__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.item.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, props.item.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_RemoveFromCart__WEBPACK_IMPORTED_MODULE_1__["default"], {
     index: props.index
-  })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "cart-item-options"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, optionValues)));
 }
 
 /***/ }),
@@ -2589,36 +2600,6 @@ function Cart(props) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/CartLoading.js":
-/*!*******************************************!*\
-  !*** ./resources/js/Pages/CartLoading.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ CartLoading)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var _Providers_CartContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Providers/CartContext */ "./resources/js/Providers/CartContext.js");
-/* harmony import */ var _Components_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/Layout */ "./resources/js/Components/Layout.js");
-
-
-
-
-function CartLoading(props) {
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_Providers_CartContext__WEBPACK_IMPORTED_MODULE_2__.CartContext),
-      cartState = _useContext.cartState,
-      updateCart = _useContext.updateCart;
-
-  _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post('/cart', cartState);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Loading..."));
-}
-
-/***/ }),
-
 /***/ "./resources/js/Pages/Home.js":
 /*!************************************!*\
   !*** ./resources/js/Pages/Home.js ***!
@@ -2701,13 +2682,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ViewProduct(props) {
+  var shippingInfo = props.product.local ? "This item is only available for local pickup, and you will only be charged for it upon completion of the project." : "Ships within the United States in 9000 days for $93";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "view-product"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     images: props.thumbs
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "view-product-text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, props.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.product.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, props.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, props.product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.product.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Shipping"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, shippingInfo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_AddToCart__WEBPACK_IMPORTED_MODULE_3__["default"], {
     options: props.options,
     product: props.product
   }))));
@@ -54317,8 +54299,6 @@ module.exports = function getSideChannel() {
 var map = {
 	"./Cart": "./resources/js/Pages/Cart.js",
 	"./Cart.js": "./resources/js/Pages/Cart.js",
-	"./CartLoading": "./resources/js/Pages/CartLoading.js",
-	"./CartLoading.js": "./resources/js/Pages/CartLoading.js",
 	"./Home": "./resources/js/Pages/Home.js",
 	"./Home.js": "./resources/js/Pages/Home.js",
 	"./ViewCategory": "./resources/js/Pages/ViewCategory.js",

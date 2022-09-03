@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { CartContext } from "../Providers/CartContext";
-import RemoveFromCart from "./RemoveFromCart";
 import CartItem from "./CartItem";
 
 export default function CartContents(props) {
     let subtotal = 0;
+    let local = 0;
     const { cartState, updateCart } = useContext(CartContext);
     if (cartState.length === 0) {
         return (
@@ -16,16 +16,28 @@ export default function CartContents(props) {
         )
     }
     const contents = cartState.map((item, index) => {
-        subtotal += item.product.price;
+        switch (Boolean(item.product.local)) {
+            case false:
+                subtotal += Number(item.product.price);
+                break;
+            case true:
+                local++;
+                break;
+        }
+
         return (
             <CartItem item={item} index={index} key={index}/>
         );
     });
+    const shippingMessage = local > 0
+        ? "Your cart contains items that are only deliverable locally. You won't be charged for them now; after arranging for delivery and completing the project, you'll be sent an invoice."
+        : null;
 
     return (
         <div className="cart-contents">
             {contents}
-            <h3>Subtotal: {subtotal}</h3>
+            <h2>Subtotal: {subtotal}</h2>
+            <h3>{shippingMessage}</h3>
         </div>
     )
 }

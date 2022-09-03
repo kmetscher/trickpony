@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model {
     protected $table = 'products';
+    protected $casts = [
+        'local' => 'boolean'
+    ];
     use HasFactory;
 }
