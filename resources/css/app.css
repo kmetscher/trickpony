@@ -332,6 +332,12 @@ nav .categories-dropdown {
     font-weight: 700;
     background-color: var(--saddlebrown);
     color: white;
+    transition: all 0.25s;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.1);
+    background-color: var(--darksaddlebrown);
 }
 
 .cart-item {

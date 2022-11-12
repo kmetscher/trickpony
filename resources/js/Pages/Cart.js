@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import Layout from "../Components/Layout";
 import CartContents from "../Components/CartContents";
+import Checkout from "../Components/Checkout";
 
 export default function Cart(props) {
     return (

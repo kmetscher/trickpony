@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { CartContext } from "../Providers/CartContext";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout";
 
 export default function CartContents(props) {
     let subtotal = 0;
@@ -38,6 +39,7 @@ export default function CartContents(props) {
             {contents}
             <h2>Subtotal: {subtotal}</h2>
             <h3>{shippingMessage}</h3>
+            <Checkout />
         </div>
     )
 }

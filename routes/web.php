@@ -4,6 +4,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
@@ -20,5 +21,5 @@ Route::get('/cart',
     ->name('cart.view');
 
 Route::post('/cart',
-    [CartController::class, 'validate'])
-    ->name('cart.validate');
+    [CheckoutController::class, 'checkout'])
+    ->name('checkout');
