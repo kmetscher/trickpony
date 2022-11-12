@@ -1,9 +1,12 @@
 import { Inertia } from "@inertiajs/inertia";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 export default function Checkout(props) {
-    let data = null;
-    async function fetchStripe() {
+    const [final, setFinal] = useState([]);
+    // const stripe = useStripe();
+    // const elements = useElements();
+    const fetchStripe = async() => {
         const params = {
             method: "POST",
             headers: {
@@ -11,29 +14,28 @@ export default function Checkout(props) {
                 "Content-Type": "application/json",
             }
         };
-        let r;
-        try {
-            r = await fetch("/cart", params)
-                .then((r) => {
-                    data = r.text();
-                    /*.then((rText) => {
-                        console.log(rText.json());
-                    });*/
-                    console.log(data);
-                });
-        }
-        catch(e) {
-            console.log(e);
-            return null;
-        }
+        const r = await fetch("/cart", params);
+        return r.text();
     }
+
     useEffect(() => {
-        fetchStripe();
+        fetchStripe()
+            .then((res) => {
+                setFinal(JSON.parse(res)); 
+            });
     }, []);
+
+    if (!final) {
+        return(
+            <div>
+                <h1>Loading</h1>
+            </div>
+        );
+    }
 
     return(
         <div>
-            <h1>{data}</h1>
+            <h1>Here be {final.clientSecret}</h1>
         </div>
     );
 }

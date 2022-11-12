@@ -11,6 +11,14 @@ class CheckoutController extends Controller {
         }
     }
     public function checkout(Request $request) {
-        return ("howdy");
+        $intent = PaymentIntent::create([
+            'amount' => 1500,
+            'currency' => 'usd',
+            'payment_method_types' => ['card'],
+        ]);
+        $output = [
+            'clientSecret' => $intent->client_secret,
+        ];
+        return (json_encode($output));
     }
 }
